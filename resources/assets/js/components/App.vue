@@ -50,8 +50,13 @@
         },
         methods: {
             logout() {
-                auth.deAuthorise()
-                router.push({name:"Login"})
+
+                axios.post("/api/logout")
+                    .then( ({data}) => {
+                        auth.deAuthorise()
+                        router.push({name:"Login"})
+                    } );
+                    
             }
         }
 
