@@ -5,10 +5,10 @@
 </p>
 
 ## Laravel REST Api Crud
-This is a plain, authenticated SPA Crud application with Laravel Rest Api on the back. Rest API can be consumed from this application or directly onto the API. Data on both these views are token authenticated. Styling is with Bootstrap
+This is a template Laravel based REST Api with a handful of example data models to show case a typical CRUD application. This api can be used as the base for front-end consumption from any Javascrip Frame using Ajax and directly from native mobile apps developed in iOS Swift.
 
 ## Installation
-Clone or Download this repo. These instructions assume that you have installed Composer, Laravel 5.5, PHP7, Node Package Manager and whatever prefered database system. I used Mysql for this.
+Clone or Download this repo. These instructions assume that you have installed Composer, Laravel 5.5, PHP7 and whatever prefered database system. I used Mysql for this.
 
 Once downloaded, cd into repo directory and start installation:
 
@@ -19,14 +19,14 @@ composer install
 Create a new database. I used mysql:
 ````ruby
 mysql -u root -p
-create database laravel_vue2_crud;
+create database laravel_crud;
 CREATE USER 'homestead'@'%' IDENTIFIED BY 'secret';
 grant all privileges on *.* to 'homestead'@'%';
 ````
 
 Copy .env.example to .env and change the database variable in .env:
 ````ruby
-DB_DATABASE=laravel_vue2_crud
+DB_DATABASE=laravel_crud
 ````
 
 Generate the Artisan key:
@@ -39,17 +39,7 @@ Migrate the tables and seed the database:
 php artisan migrate:refresh --seed
 ````
 
-Install Vue2 components listed in package.json:
-````ruby
-npm install
-````
-
-Use two tabs. Run NPM hot watch on one:
-````ruby
-npm run watch
-````
-
-and serve the application with artisan:
+and serve the REST API with artisan:
 ````ruby
 php artisan serve
 ````
