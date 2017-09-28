@@ -44,3 +44,14 @@ Install Vue2 components listed in package.json:
 npm install
 ````
 
+Use two tabs. Run NPM hot watch on one:
+````ruby
+npm run watch
+````
+
+and serve the application with artisan:
+````ruby
+php artisan serve
+````
+
+You should now be able to browse this app on http://localhost:8000. You will need to register first and then login to see the CRUD application.
