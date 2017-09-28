@@ -31,8 +31,4 @@ Route::group(['middleware' => 'auth:api'], function() {
 	// -- Lookups
 	Route::get('lookups/statuses', 'LookupStatusController@index');
 
-
 });
-
-
-
