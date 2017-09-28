@@ -50,11 +50,26 @@ php artisan serve
 You should now be able to browse this app on http://localhost:8000. You will need to register first and then login to see the CRUD application.
 
 ## Rest API Example End-Points
-The api have two sets of Example End-Points, Jobs and Users as well as registration, login and logout points. 
+The api have two sets of Example End-Points, Jobs and Users as well as registration, login and logout points. You need to register first. I used curl to play around with this:
+
+So registration:
 
 ````ruby
-http://localhost:8000/api/members
+$ curl -X POST http://localhost:8000/api/register \
+ -H "Accept: application/json" \
+ -H "Content-Type: application/json" \
+ -d '{"name": "Jim Beam", "email": "jim@inabottle.com", "password": "somesecret", "password_confirmation": "somesecret"}'
 ````
+
+All the above details are required. The two passwords are compared and a bunch of checks done on validity of email and passwords and returns
+
+````ruby
+$ curl -X POST http://localhost:8000/api/register \
+ -H "Accept: application/json" \
+ -H "Content-Type: application/json" \
+ -d '{"name": "Jim Beam", "email": "jim@inabottle.com", "password": "somesecret", "password_confirmation": "somesecret"}'
+````
+
 
 The Api have a pagination end-point with filter capability: Access pagination with:
 ````ruby
