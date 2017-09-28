@@ -4,7 +4,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## Laravel Vue2 Crud
+## Laravel REST Api Crud
 This is a plain, authenticated SPA Crud application with Laravel Rest Api on the back. Rest API can be consumed from this application or directly onto the API. Data on both these views are token authenticated. Styling is with Bootstrap
 
 ## Installation
