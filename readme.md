@@ -69,9 +69,10 @@ $ curl -X POST http://localhost:8000/api/register \
  -H "Content-Type: application/json" \
  -d '{"name": "Jim Beam", "email": "jim@inabottle.com", "password": "somesecret", "password_confirmation": "somesecret"}'
 ````
+... which should respond with:
 
 ````ruby
-{"data": 
+{"user": 
  {
   "name":"Jim Beam",
   "email":"jim@inabottle.com",
@@ -81,6 +82,39 @@ $ curl -X POST http://localhost:8000/api/register \
   "api_token":"0944eee1038c7c318524bf8c5db381d7"
   }
  }
+````
+As the token is returned, we are essentially authenticated and all we have to do is include the api_token in the header but we'll do a login as well.
+
+Using the login end-point:
+
+````ruby
+$ curl -X POST localhost:8000/api/login \
+  -H "Accept: application/json" \
+  -H "Content-type: application/json" \
+  -d '{"email": "jim@inabottle.com", "password": "somesecret" }'
+ ````
+
+... and it returns the same thing:
+
+````ruby
+{"user": 
+ {
+  "name":"Jim Beam",
+  "email":"jim@inabottle.com",
+  "updated_at":"2017-09-29 00:26:02",
+  "created_at":"2017-09-29 00:26:02",
+  "id":106,
+  "api_token":"0944eee1038c7c318524bf8c5db381d7"
+  }
+ }
+````
+
+Now add the api to any subsequent call. This one gets a full jobs list:
+````ruby
+curl -X POST http://localhost:8000/api/jobs \
+  -H "Accept: application/json" \
+  -H "Content-type: application/json" \
+  -H "Authorization: Bearer 0944eee1038c7c318524bf8c5db381d7" 
 ````
 
 The Api have a pagination end-point with filter capability: Access pagination with:
