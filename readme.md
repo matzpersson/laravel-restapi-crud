@@ -70,6 +70,18 @@ $ curl -X POST http://localhost:8000/api/register \
  -d '{"name": "Jim Beam", "email": "jim@inabottle.com", "password": "somesecret", "password_confirmation": "somesecret"}'
 ````
 
+````ruby
+{"data": 
+ {
+  "name":"Jim Beam",
+  "email":"jim@inabottle.com",
+  "updated_at":"2017-09-29 00:26:02",
+  "created_at":"2017-09-29 00:26:02",
+  "id":106,
+  "api_token":"0944eee1038c7c318524bf8c5db381d7"
+  }
+ }
+````
 
 The Api have a pagination end-point with filter capability: Access pagination with:
 ````ruby
