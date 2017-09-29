@@ -13,7 +13,7 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function paginate()
+    public function paginate(Request $request)
     {
         // -- Handle sort
         if (request()->has('sort')) {
@@ -21,6 +21,15 @@ class JobController extends Controller
             $query = Job::with("status")->with("assignedto")->orderBy($sortCol, $sortDir);
         } else {
             $query = Job::with("status")->with("assignedto")->orderBy('id', 'asc');
+        }
+
+        if ($request->exists('filter')) {
+            $query->where(function($q) use($request) {
+                $value = "%{$request->filter}%";
+                $q->where('name', 'like', $value)
+                    ->orWhere('description', 'like', $value);
+
+            });
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
@@ -33,20 +42,31 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
+        // -- Handle sort
+        if (request()->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', request()->sort);
+            $query = Job::with("status")->with("assignedto")->orderBy($sortCol, $sortDir);
+        } else {
+            $query = Job::with("status")->with("assignedto")->orderBy('id', 'asc');
+        }
+
+        // -- Handle filters
+        if ($request->exists('filter')) {
+            $query->where(function($q) use($request) {
+                $value = "%{$request->filter}%";
+                $q->where('name', 'like', $value)
+                    ->orWhere('description', 'like', $value);
+            });
+        }
+        
+        return response()->json( $query->get() );
+        
         return Job::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -56,7 +76,9 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $job = Job::create($request->all());
+
+        return response()->json($job, 201);
     }
 
     /**
@@ -67,19 +89,9 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        //
+        return $job;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Job  $job
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Job $job)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

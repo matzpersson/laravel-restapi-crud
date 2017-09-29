@@ -1,17 +1,15 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\User;
-use App\Status;
-use App\Job;
-use App\LookupStatus;
-
+// -- Register, Login and Log end-points
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
 
+// -- Token check for authentication
 Route::group(['middleware' => 'auth:api'], function() {
 
+	// -- Only available if authenticated
+	
 	// -- Users
 	Route::get('users', 'UserController@index');
 	Route::get('users/paginate', 'UserController@paginate');
