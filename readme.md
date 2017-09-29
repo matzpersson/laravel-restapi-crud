@@ -50,7 +50,7 @@ php artisan serve
 You should now be able to browse this app on http://localhost:8000. You will need to register first and then login to see the CRUD application.
 
 ## Rest API Example End-Points
-The api have two sets of Example End-Points, Jobs and Users as well as registration, login and logout points. You need to register first. I used curl to play around with this:
+The api have two sets of example End-Points being jobs and users as well as registration, login and logout points. You need to register first. I used curl to play around with this:
 
 So registration:
 
@@ -61,15 +61,7 @@ $ curl -X POST http://localhost:8000/api/register \
  -d '{"name": "Jim Beam", "email": "jim@inabottle.com", "password": "somesecret", "password_confirmation": "somesecret"}'
 ````
 
-All the above details are required. The two passwords are compared and a bunch of checks done on validity of email and passwords and returns
-
-````ruby
-$ curl -X POST http://localhost:8000/api/register \
- -H "Accept: application/json" \
- -H "Content-Type: application/json" \
- -d '{"name": "Jim Beam", "email": "jim@inabottle.com", "password": "somesecret", "password_confirmation": "somesecret"}'
-````
-... which should respond with:
+All the above details are required. The two passwords are compared and a bunch of checks done on validity of email and passwords and returns:
 
 ````ruby
 {"user": 
@@ -83,9 +75,8 @@ $ curl -X POST http://localhost:8000/api/register \
   }
  }
 ````
-As the token is returned, we are essentially authenticated and all we have to do is include the api_token in the header but we'll do a login as well.
 
-Using the login end-point:
+As the token is returned, we are authenticated and all we have to do is include the api_token in the header but we'll do a login as well. Using the login end-point and details we just registered:
 
 ````ruby
 $ curl -X POST localhost:8000/api/login \
@@ -96,6 +87,7 @@ $ curl -X POST localhost:8000/api/login \
 
 ... and it returns the same thing:
 
+
 ````ruby
 {"user": 
  {
@@ -109,7 +101,8 @@ $ curl -X POST localhost:8000/api/login \
  }
 ````
 
-Now add the api token to any subsequent call. This one gets a full jobs list using the GET verb:
+Now add the api token to the header of any subsequent call. This one gets a full jobs list using the GET verb:
+
 ````ruby
 curl -X GET http://localhost:8000/api/jobs \
   -H "Accept: application/json" \
@@ -124,10 +117,10 @@ curl -X  POST http://localhost:8000/api/jobs \
   -H "Accept: application/json" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer 0944eee1038c7c318524bf8c5db381d7" \
-  -d '{"name": "Lorem", "description": "Esse dignissimos ipsam" , "status_id": 1, "progress": 2, "assignedto_id": 2}'
+  -d '{"name": "Lorem", "description": "Esse dignissimos ipsam" , "status_id": 1, "progress": 20, "assignedto_id": 2}'
 ````
 
-... and this will filter jobs and return records filtered by dignissimos in name or description:
+This will filter jobs and return records filtered by 'dignissimos' in name or description fields:
 
 ````ruby
 curl -X  GET http://localhost:8000/api/jobs?filter=dignissimos \
