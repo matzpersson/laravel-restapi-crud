@@ -37,7 +37,7 @@ Generate the Artisan key:
 php artisan key:generate
 ````
 
-Migrate the tables and seed the database. This will fill the tables with <a target="_new" href="https://github.com/fzaninotto/Faker"?>Faker</a> data:
+Migrate the tables and seed the database. This will fill the tables with <a target="_new" href="https://github.com/fzaninotto/Faker">Faker</a> data:
 ````ruby
 php artisan migrate:refresh --seed
 ````
