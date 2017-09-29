@@ -109,20 +109,30 @@ $ curl -X POST localhost:8000/api/login \
  }
 ````
 
-Now add the api to any subsequent call. This one gets a full jobs list:
+Now add the api token to any subsequent call. This one gets a full jobs list using the GET verb:
 ````ruby
-curl -X POST http://localhost:8000/api/jobs \
+curl -X GET http://localhost:8000/api/jobs \
   -H "Accept: application/json" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer 0944eee1038c7c318524bf8c5db381d7" 
 ````
 
-The Api have a pagination end-point with filter capability: Access pagination with:
+This adds another job to the list:
+
 ````ruby
-http://localhost:8000/api/members/paginate
+curl -X  POST http://localhost:8000/api/jobs \
+  -H "Accept: application/json" \
+  -H "Content-type: application/json" \
+  -H "Authorization: Bearer 0944eee1038c7c318524bf8c5db381d7" \
+  -d '{"name": "Lorem", "description": "Esse dignissimos ipsam" , "status_id": 1, "progress": 2, "assignedto_id": 2}'
 ````
 
-or filtered across firstname, surname and email:
+... and this will filter jobs and return records filtered by dignissimos in name or description:
+
 ````ruby
-http://localhost:8000/api/members/paginate?filter=Alan
+curl -X  GET http://localhost:8000/api/jobs?filter=dignissimos \
+  -H "Accept: application/json" \
+  -H "Content-type: application/json" \
+  -H "Authorization: Bearer 0944eee1038c7c318524bf8c5db381d7" 
+````
 
