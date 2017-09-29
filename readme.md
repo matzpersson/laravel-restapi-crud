@@ -5,7 +5,7 @@
 </p>
 
 ## Laravel REST Api Crud
-This is a template Laravel based REST Api with a handful of example data models to show case a typical CRUD application. This api can be used as the base for front-end consumption from any Javascrip Frame using Ajax and directly from native mobile apps developed in iOS Swift.
+This is a template Laravel based REST Api with a handful of example data models included to show case a typical CRUD application. This api can be used as the base for front-end consumption from any Javascrip Frame using Ajax and directly from native mobile apps developed in iOS Swift.
 
 ## Quick overview on how it works
 To get access to the api, you need to first register. Once registered, you can login using the registration details. On successful authentication, you will be given a api-token. This token needs to be embedded in the header of every subsequent call to the api. Without it, you are unauthorised. The routes/api.php is the entry point into the api and it is the front end for controlling authorised access.
@@ -37,7 +37,7 @@ Generate the Artisan key:
 php artisan key:generate
 ````
 
-Migrate the tables and seed the database:
+Migrate the tables and seed the database. This will fill the tables with <a target="_new" href="https://github.com/fzaninotto/Faker"?>Faker</a> data:
 ````ruby
 php artisan migrate:refresh --seed
 ````
